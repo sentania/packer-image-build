@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  github-runner:
+    build:
+      context: .
+      args:
+        RUNNER_UID: 999   # Change this value to your desired UID
+    container_name: github-runner-packer
+    environment:
+      - REPO_URL=<REDACTED>
+      - RUNNER_TOKEN=<REDACTED>
+      - TZ=America/Chicago
+    volumes:
+      - /var/docker/github-runner-packer:/home/runner/
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    restart: always
+
