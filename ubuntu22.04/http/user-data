@@ -6,8 +6,7 @@ autoinstall:
         - sudo systemctl stop ssh
     locale: en_US
     keyboard:
-        layout: en
-        variant: us
+        layout: us
     packages: 
       - openssh-server
       - open-vm-tools
@@ -21,7 +20,7 @@ autoinstall:
     identity:
         hostname: ubuntu-server
         username: labuser
-        password: "$6$rounds=4096$Fyx3u/b3bvMeiVJF$.QykRlyQdabmGiV/GvhaWphk3GBhQ10nm15GSrztD/9oCyfw9XxRtvhLMOl6JgdMY8yRZMP.WTGgne8W.Lyk60"
+        password: $6$BqHZ32RsE/QdK5b2$7SalIbI6V7qvrKOfiBho87.E6O.2IpLqyMkc/X8uVhqyrVxArVN3uM6n6hyb1aKiNAgfzzOsIove9zGzF0RIl0"
     ssh:
         install-server: yes
         allow-pw: yes
