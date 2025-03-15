@@ -1,0 +1,37 @@
+#cloud-config
+autoinstall:
+    version: 1
+    early-commands:
+        # workaround to stop ssh for packer as it thinks it timed out
+        - sudo systemctl stop ssh
+    locale: en_US
+    keyboard:
+        layout: en
+        variant: us
+    packages: 
+      - openssh-server
+      - open-vm-tools
+      - cloud-init
+    network:
+        network:
+            version: 2
+            ethernets:
+                ens192:
+                    dhcp4: true
+    identity:
+        hostname: ubuntu-server
+        username: labuser
+        password: "$6$rounds=4096$Fyx3u/b3bvMeiVJF$.QykRlyQdabmGiV/GvhaWphk3GBhQ10nm15GSrztD/9oCyfw9XxRtvhLMOl6JgdMY8yRZMP.WTGgne8W.Lyk60"
+    ssh:
+        install-server: yes
+        allow-pw: yes
+        authorized-keys:
+            - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCebLZZYuVSoAKTyryMC9s7YeMAm7BcwoVFz0DJskIR0oGjPgiPkZI+nCSQbDvtdc8Lm3yeS/CmVtsNv6wWdbHNSxhSmczLzgSfZgO3iBcrI/VhWa/7cs5GSXuZvfX0ww4L5M/INk36HIKmi+9TvdQlFrfmxLnVGtGHBLdPrOOXfdUYBkT3KYI8WQubk6JF+jjYKj9jBKgAxt4t7P3NdcTRl+ILbeh6QllMjsZjUJLLGEgvrCzfBOKtBBmhDG/O3Hv5/kTVef0rqEBlpTlt/K8QbCkG7tCeogaqagLMQJUpJWafIXLk8LHJOgMbORUwPe4KOuarsx/W8bCU/O8CHIaz rsa-key-20250129
+    storage:
+        layout:
+            name: lvm
+    user-data:
+        disable_root: false
+    late-commands:
+        - echo 'labuser ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/labuser
+        - curtin in-target --target=/target -- chmod 440 /etc/sudoers.d/labuser
