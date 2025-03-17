@@ -1,11 +1,3 @@
-# Name or IP of you vCenter Server
-vsphere_server          = "vcenter.int.sentania.net"
-
-# vsphere username
-vsphere_username        = "administrator@vsphere.local"
-
-# vsphere password
-vsphere_password        = "guj34mp0w3R2win!"
 
 # vsphere datacenter name
 vsphere_datacenter      = "sboweLab"
@@ -30,4 +22,4 @@ shell_scripts           = ["./setup/setup.sh"]
 ssh_username            = "labuser"
 
 # SSH password (created in autounattend.xml. If you change it here the please also adjust in ./html/user-data)
-ssh_password            = "VMware1!"
+ssh_password            = "VMware123!"

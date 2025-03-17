@@ -12,8 +12,10 @@ services:
       - RUNNER_TOKEN=<REDACTED>
       - TZ=America/Chicago
     volumes:
-      - /var/docker/github-runner-packer:/home/runner/
+      - gihub-runner-packer:/home/runner/
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     restart: always
 
+volumes:
+  gihub-runner-packer:
