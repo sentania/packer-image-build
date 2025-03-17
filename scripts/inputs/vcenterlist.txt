@@ -1,0 +1,2 @@
+lab-vcf-m01-vc.int.sentania.net
+lab-vcf-w01-vc.int.sentania.net

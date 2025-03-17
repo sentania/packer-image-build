@@ -59,4 +59,14 @@ jobs:
             -var "vsphere_vm_name=ubuntu-24-temp" \
             -var "template_library_Name=ubuntu24" \
             -var "content_library_destination=vcenter.int.sentania.net" .
+      
+      - name: Sync Content Libraries
+        working-directory: scripts
+        env:
+          VCENTER_USERNAME: ${{ vars.VCENTER_USERNAME }}
+          VCENTER_PASSWORD: ${{ secrets.VCENTER_PASSWORD }}
+          VCENTER_SERVER: ${{ vars.VCENTER_SERVER }}
+        id: syncLibrary
+        run: "python3 sync_content_libraries.py ${VCENTER_USERNAME} ${VCENTER_PASSWORD}" inputs/vcenterlist.txt"
+           
     
