@@ -6,6 +6,21 @@ packer {
     }
   }
 }
+variable "content_library_destination" {
+  type    = string
+  default = "Images"
+}
+variable "template_library_Name" {
+  type = string
+}
+variable "library_vm_destroy" {
+  type    = bool
+  default = true
+}
+variable "ovf" {
+  type    = bool
+  default = true
+}
 
 variable "cpu_num" {
   type    = number
@@ -120,6 +135,13 @@ source "vsphere-iso" "ubuntu" {
   insecure_connection   = "true"
   datacenter            = var.vsphere_datacenter
   datastore             = var.vsphere_datastore
+
+  content_library_destination {
+    destroy = var.library_vm_destroy
+    library = var.content_library_destination
+    name    = var.template_library_Name
+    ovf     = var.ovf
+  }
 
   CPUs                  = var.cpu_num
   RAM                   = var.mem_size

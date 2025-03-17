@@ -20,7 +20,7 @@ autoinstall:
     identity:
         hostname: ubuntu-server
         username: labuser
-        password: $6$BqHZ32RsE/QdK5b2$7SalIbI6V7qvrKOfiBho87.E6O.2IpLqyMkc/X8uVhqyrVxArVN3uM6n6hyb1aKiNAgfzzOsIove9zGzF0RIl0"
+        password: $6$GcokXb86Rt.azJEj$4zeQGtCXwY8hluxfdkhDARjOy98s4EoGGPRfWadZOXhz2qNkG0g0rKjBbZCuQsrJY/w/zxncMtteD0tHUZSXD0
     ssh:
         install-server: yes
         allow-pw: yes
