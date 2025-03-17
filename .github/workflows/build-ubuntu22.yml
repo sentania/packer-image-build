@@ -23,9 +23,9 @@ jobs:
       - name: Build Ubuntu 22 Image
         working-directory: ubuntu22
         env:
-          VCENTER_USERNAME: ${{ secrets.VCENTER_USERNAME }}
+          VCENTER_USERNAME: ${{ vars.VCENTER_USERNAME }}
           VCENTER_PASSWORD: ${{ secrets.VCENTER_PASSWORD }}
-          VCENTER_SERVER: ${{ secrets.VCENTER_SERVER }}
+          VCENTER_SERVER: ${{ vars.VCENTER_SERVER }}
         run: |
           packer build -force \
             -var "vsphere_username=${VCENTER_USERNAME}" \
