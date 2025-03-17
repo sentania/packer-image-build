@@ -15,6 +15,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: Run `packer init`
+        working-directory: ubuntu22
+        id: init
+        run: "packer init ./ubuntu22.pkr.hcl"
+
       - name: Build Ubuntu 22 Image
         working-directory: ubuntu22
         env:
