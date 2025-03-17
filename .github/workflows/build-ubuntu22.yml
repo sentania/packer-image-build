@@ -28,7 +28,7 @@ jobs:
           VCENTER_SERVER: ${{ vars.VCENTER_SERVER }}
         run: |
           packer build -force \
-            -var-file="ubuntu22.pkrvars.hcl"
+            -var-file="ubuntu22.pkrvars.hcl" \
             -var "vsphere_username=${VCENTER_USERNAME}" \
             -var "vsphere_password=${VCENTER_PASSWORD}" \
             -var "vsphere_server=${VCENTER_SERVER}" \
