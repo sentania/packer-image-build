@@ -23,9 +23,9 @@ jobs:
           VCENTER_SERVER: ${{ secrets.VCENTER_SERVER }}
         run: |
           packer build -force \
-            -var "username=${VCENTER_USERNAME}" \
-            -var "password=${VCENTER_PASSWORD}" \
-            -var "vcenter_server=${VCENTER_SERVER}" \
+            -var "vsphere_username=${VCENTER_USERNAME}" \
+            -var "vsphere_password=${VCENTER_PASSWORD}" \
+            -var "vsphere_server=${VCENTER_SERVER}" \
             -var "vsphere_guest_os_type=ubuntu64Guest" \
             -var "vsphere_vm_name=ubuntu-22-temp" \
             -var "template_library_Name=ubuntu22" \
