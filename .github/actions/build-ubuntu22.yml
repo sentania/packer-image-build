@@ -1,0 +1,32 @@
+name: Packer Image Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  packer-build:
+    runs-on: self-hosted  # Ensure your self-hosted runner has Packer installed
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Build Ubuntu 22 Image
+        working-directory: ubuntu22
+        env:
+          VCENTER_USERNAME: ${{ secrets.VCENTER_USERNAME }}
+          VCENTER_PASSWORD: ${{ secrets.VCENTER_PASSWORD }}
+          VCENTER_SERVER: ${{ secrets.VCENTER_SERVER }}
+        run: |
+          packer build -force \
+            -var "username=${VCENTER_USERNAME}" \
+            -var "password=${VCENTER_PASSWORD}" \
+            -var "vcenter_server=${VCENTER_SERVER}" \
+            -var "vsphere_guest_os_type=ubuntu64Guest" \
+            -var "vsphere_vm_name=ubuntu-22-temp" \
+            -var "template_library_Name=ubuntu22" \
+            -var "content_library_destination=vcenter.int.sentania.net" .
