@@ -17,7 +17,7 @@ jobs:
 
       - name: Run `packer init`
         working-directory: ubuntu22
-        id: init
+        id: init22
         run: "packer init ./ubuntu22.pkr.hcl"
 
       - name: Build Ubuntu 22 Image
@@ -40,7 +40,7 @@ jobs:
 
       - name: Run `packer init`
         working-directory: ubuntu24
-        id: init
+        id: init24
         run: "packer init ./ubuntu24.pkr.hcl"
     
       - name: Build Ubuntu 24 Image
