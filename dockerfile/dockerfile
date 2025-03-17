@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     libssl3 \
     wget \
     unzip \
+    xorriso \
     && rm -rf /var/lib/apt/lists/*
 
 ARG RUNNER_UID=999
