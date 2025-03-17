@@ -36,29 +36,6 @@ jobs:
             -var "vsphere_vm_name=ubuntu-22-temp" \
             -var "template_library_Name=ubuntu22" \
             -var "content_library_destination=vcenter.int.sentania.net" .
-
-
-      - name: Run `packer init`
-        working-directory: ubuntu24
-        id: init24
-        run: "packer init ./ubuntu24.pkr.hcl"
-    
-      - name: Build Ubuntu 24 Image
-        working-directory: ubuntu24
-        env:
-          VCENTER_USERNAME: ${{ vars.VCENTER_USERNAME }}
-          VCENTER_PASSWORD: ${{ secrets.VCENTER_PASSWORD }}
-          VCENTER_SERVER: ${{ vars.VCENTER_SERVER }}
-        run: |
-          packer build -force \
-            -var-file="ubuntu24.pkrvars.hcl" \
-            -var "vsphere_username=${VCENTER_USERNAME}" \
-            -var "vsphere_password=${VCENTER_PASSWORD}" \
-            -var "vsphere_server=${VCENTER_SERVER}" \
-            -var "vsphere_guest_os_type=ubuntu64Guest" \
-            -var "vsphere_vm_name=ubuntu-24-temp" \
-            -var "template_library_Name=ubuntu24" \
-            -var "content_library_destination=vcenter.int.sentania.net" .
       
       - name: Sync Content Libraries
         working-directory: scripts
