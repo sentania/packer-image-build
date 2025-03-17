@@ -27,8 +27,8 @@ rm /var/lib/dbus/machine-id
 ln -s /etc/machine-id /var/lib/dbus/machine-id
 
 # optional: cleaning cloud-init
-# echo '> Cleaning cloud-init'
-# rm -rf /etc/cloud/cloud.cfg.d/subiquity-disable-cloudinit-networking.cfg
-# rm -rf /etc/cloud/cloud.cfg.d/99-installer.cfg
-# echo 'datasource_list: [ VMware, NoCloud, ConfigDrive ]' | tee /etc/cloud/cloud.cfg.d/90_dpkg.cfg
-# /usr/bin/cloud-init clean
+ echo '> Cleaning cloud-init'
+ rm -rf /etc/cloud/cloud.cfg.d/subiquity-disable-cloudinit-networking.cfg
+ rm -rf /etc/cloud/cloud.cfg.d/99-installer.cfg
+ echo 'datasource_list: [ VMware, NoCloud, ConfigDrive ]' | tee /etc/cloud/cloud.cfg.d/90_dpkg.cfg
+ /usr/bin/cloud-init clean
