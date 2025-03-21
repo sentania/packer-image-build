@@ -149,7 +149,7 @@ source "vsphere-iso" "ubuntu" {
   disk_controller_type  = ["pvscsi"]
   guest_os_type         = var.vsphere_guest_os_type
   iso_paths             = ["vcenter.int.sentania.net/ubuntu-22.04.5-live-server-amd64/ubuntu-22.04.5-live-server-amd64.iso"]
-  cd_content            = {
+  floppy_content        = {
     "/meta-data" = file("${var.cloudinit_metadata}")
     "/user-data" = file("${var.cloudinit_userdata}")
   }
