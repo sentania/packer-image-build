@@ -135,6 +135,7 @@ source "vsphere-iso" "ubuntu" {
   insecure_connection   = "true"
   datacenter            = var.vsphere_datacenter
   datastore             = var.vsphere_datastore
+  remove_cdrom          = "true"
 
   content_library_destination {
     destroy = var.library_vm_destroy
@@ -149,7 +150,7 @@ source "vsphere-iso" "ubuntu" {
   disk_controller_type  = ["pvscsi"]
   guest_os_type         = var.vsphere_guest_os_type
   iso_paths             = ["vcenter.int.sentania.net/ubuntu-22.04.5-live-server-amd64/ubuntu-22.04.5-live-server-amd64.iso"]
-  floppy_content        = {
+  cd_content        = {
     "/meta-data" = file("${var.cloudinit_metadata}")
     "/user-data" = file("${var.cloudinit_userdata}")
   }
