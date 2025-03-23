@@ -43,6 +43,6 @@ jobs:
           VCENTER_USERNAME: ${{ vars.VCENTER_USERNAME }}
           VCENTER_PASSWORD: ${{ secrets.VCENTER_PASSWORD }}
         id: syncLibrary
-        run: "python3 sync_content_libraries.py ${VCENTER_USERNAME} ${VCENTER_PASSWORD} inputs/vcenterlist.txt"
+        run: "python3 sync_content_libraries.py ${VCENTER_USERNAME} ${VCENTER_PASSWORD}"
            
     
