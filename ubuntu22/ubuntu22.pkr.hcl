@@ -175,7 +175,7 @@ source "vsphere-iso" "ubuntu" {
   ssh_handshake_attempts = "100000"
 
   boot_order            = "disk,cdrom,floppy"
-  boot_wait             = "3s"
+  boot_wait             = "5s"
   boot_command          = var.boot_command
   shutdown_command      = "echo '${var.ssh_password}' | sudo -S -E shutdown -P now"
   shutdown_timeout      = "15m"
