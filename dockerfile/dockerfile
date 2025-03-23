@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     && pip3 install requests \
+    pip install --upgrade git+https://github.com/vmware/vsphere-automation-sdk-python.git \\
     && rm -rf /var/lib/apt/lists/*
 
 ARG RUNNER_UID=999
