@@ -62,7 +62,7 @@ variable "vsphere_guest_os_type" {
   default = ""
 }
 
-variable "vsphere_cluster" {
+variable "vsphere_host" {
   type    = string
   default = ""
 }
@@ -129,7 +129,7 @@ variable "boot_command" {
 source "vsphere-iso" "ubuntu" {
 
   vcenter_server        = var.vsphere_server
-  cluster               = var.vsphere_cluster 
+  host                  = var.vsphere_host
   username              = var.vsphere_username
   password              = var.vsphere_password
   insecure_connection   = "true"
