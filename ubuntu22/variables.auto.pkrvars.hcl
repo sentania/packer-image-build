@@ -3,13 +3,13 @@
 vsphere_datacenter      = "sboweLab"
 
 # name or IP of the ESXi host
-vsphere_cluster         = "nucCluster"
+vsphere_host            = "esx1.int.sentania.nte"
 
 # vsphere network
 vsphere_network         = "VLAN2500 172.25.0.0_24"
 
 # vsphere datastore
-vsphere_datastore       = "storage-iscsi-1"
+vsphere_datastore       = "esx1-local"
 
 # cloud_init files for unattended configuration for Ubuntu
 cloudinit_userdata      = "./http/user-data"
