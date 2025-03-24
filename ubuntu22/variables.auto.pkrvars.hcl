@@ -3,7 +3,7 @@
 vsphere_datacenter      = "sboweLab"
 
 # name or IP of the ESXi host
-vsphere_host            = "esx1.int.sentania.nte"
+vsphere_host            = "esx1.int.sentania.net"
 
 # vsphere network
 vsphere_network         = "VLAN2500 172.25.0.0_24"
