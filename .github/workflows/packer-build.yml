@@ -31,7 +31,7 @@ jobs:
             -var-file="ubuntu.pkrvars.hcl" \
             -var "vsphere_username=${VCENTER_USERNAME}" \
             -var "vsphere_password=${VCENTER_PASSWORD}" \
-            -var "vsphere_server=${VCENTER_SERVER}"
+            -var "vsphere_server=${VCENTER_SERVER}" .
       
       - name: Sync Content Libraries
         working-directory: scripts
