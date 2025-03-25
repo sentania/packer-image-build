@@ -16,19 +16,19 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run `packer init`
-        working-directory: ubuntu22
+        working-directory: ubuntu
         id: init22
-        run: "packer init ./ubuntu22.pkr.hcl"
+        run: "packer init ./ubuntu.pkr.hcl"
 
       - name: Build Ubuntu 22 Image
-        working-directory: ubuntu22
+        working-directory: ubuntu
         env:
           VCENTER_USERNAME: ${{ vars.VCENTER_USERNAME }}
           VCENTER_PASSWORD: ${{ secrets.VCENTER_PASSWORD }}
           VCENTER_SERVER: ${{ vars.VCENTER_SERVER }}
         run: |
           packer build -force \
-            -var-file="ubuntu22.pkrvars.hcl" \
+            -var-file="ubuntu.pkrvars.hcl" \
             -var "vsphere_username=${VCENTER_USERNAME}" \
             -var "vsphere_password=${VCENTER_PASSWORD}" \
             -var "vsphere_server=${VCENTER_SERVER}" \
