@@ -38,7 +38,7 @@ source "vsphere-iso" "ubuntu22" {
     disk_thin_provisioned = true
   }
 
-  vm_name               = "ubuntu-22-template"
+  vm_name               = "ubuntu22-template"
   convert_to_template   = "true"
   communicator          = "ssh"
   ssh_username          = var.ssh_username
@@ -71,7 +71,7 @@ source "vsphere-iso" "ubuntu24" {
   content_library_destination {
     destroy = var.library_vm_destroy
     library = var.content_library_destination
-    name    = "ubuntu22"
+    name    = "ubuntu24"
     ovf     = var.ovf
   }
 
@@ -97,7 +97,7 @@ source "vsphere-iso" "ubuntu24" {
     disk_thin_provisioned = true
   }
 
-  vm_name               = "ubuntu-22-template"
+  vm_name               = "ubuntu24-template"
   convert_to_template   = "true"
   communicator          = "ssh"
   ssh_username          = var.ssh_username
