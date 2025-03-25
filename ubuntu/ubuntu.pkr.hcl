@@ -1,7 +1,7 @@
-source "vsphere-iso" "ubuntu" {
+source "vsphere-iso" "ubuntu22" {
 
   vcenter_server        = var.vsphere_server
-  host               = var.vsphere_host 
+  host                  = var.vsphere_host 
   username              = var.vsphere_username
   password              = var.vsphere_password
   insecure_connection   = "true"
@@ -12,7 +12,7 @@ source "vsphere-iso" "ubuntu" {
   content_library_destination {
     destroy = var.library_vm_destroy
     library = var.content_library_destination
-    name    = var.template_library_Name
+    name    = "ubuntu22"
     ovf     = var.ovf
   }
 
@@ -20,7 +20,7 @@ source "vsphere-iso" "ubuntu" {
   RAM                   = var.mem_size
   RAM_reserve_all       = true
   disk_controller_type  = ["pvscsi"]
-  guest_os_type         = var.vsphere_guest_os_type
+  guest_os_type         = "ubuntu64Guest"
   iso_paths             = ["vcenter.int.sentania.net/ubuntu-22.04.5-live-server-amd64/ubuntu-22.04.5-live-server-amd64.iso"]
   cd_content        = {
     "/meta-data" = file("${var.cloudinit_metadata}")
@@ -38,7 +38,7 @@ source "vsphere-iso" "ubuntu" {
     disk_thin_provisioned = true
   }
 
-  vm_name               = var.vsphere_vm_name
+  vm_name               = "ubuntu-22-template"
   convert_to_template   = "true"
   communicator          = "ssh"
   ssh_username          = var.ssh_username
@@ -58,7 +58,7 @@ source "vsphere-iso" "ubuntu" {
 }
 
 build {
-  sources = ["source.vsphere-iso.ubuntu"]
+  sources = ["source.vsphere-iso.ubuntu22"]
 
   provisioner "shell" {
     execute_command = "echo '${var.ssh_password}' | {{.Vars}} sudo -S -E bash '{{.Path}}'"

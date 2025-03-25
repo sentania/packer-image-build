@@ -8,11 +8,9 @@ packer {
 }
 variable "content_library_destination" {
   type    = string
-  default = "Images"
+  default = "vcenter.int.sentania.net"
 }
-variable "template_library_Name" {
-  type = string
-}
+
 variable "library_vm_destroy" {
   type    = bool
   default = true
@@ -57,11 +55,6 @@ variable "vsphere_datacenter" {
   default = ""
 }
 
-variable "vsphere_guest_os_type" {
-  type    = string
-  default = ""
-}
-
 variable "vsphere_host" {
   type    = string
   default = ""
@@ -79,11 +72,6 @@ variable "vsphere_network" {
 }
 
 variable "vsphere_server" {
-  type    = string
-  default = ""
-}
-
-variable "vsphere_vm_name" {
   type    = string
   default = ""
 }

@@ -31,11 +31,7 @@ jobs:
             -var-file="ubuntu.pkrvars.hcl" \
             -var "vsphere_username=${VCENTER_USERNAME}" \
             -var "vsphere_password=${VCENTER_PASSWORD}" \
-            -var "vsphere_server=${VCENTER_SERVER}" \
-            -var "vsphere_guest_os_type=ubuntu64Guest" \
-            -var "vsphere_vm_name=ubuntu-22-temp" \
-            -var "template_library_Name=ubuntu22" \
-            -var "content_library_destination=vcenter.int.sentania.net" .
+            -var "vsphere_server=${VCENTER_SERVER}"
       
       - name: Sync Content Libraries
         working-directory: scripts
