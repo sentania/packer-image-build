@@ -4,7 +4,6 @@ import sys
 import requests
 from vmware.vapi.vsphere.client import create_vsphere_client
 from com.vmware.content_client import SubscribedLibrary
-from com.vmware.content.library_client import Subscriptions
 
 def main():
     if len(sys.argv) != 3:
@@ -14,7 +13,7 @@ def main():
     username = sys.argv[1]
     password = sys.argv[2]
 
-    # Assume vCenter list file is at inputs/vcenterlist.txt
+    # Assume the vCenter list is in inputs/vcenterlist.txt
     vcenter_file = os.path.join("inputs", "vcenterlist.txt")
     try:
         with open(vcenter_file, 'r') as f:
@@ -26,7 +25,7 @@ def main():
     for vcenter in vcenters:
         print(f"\nProcessing vCenter: {vcenter}")
         session = requests.session()
-        session.verify = False  # Disable cert verification if necessary
+        session.verify = False  # Disable certificate verification if needed
 
         try:
             client = create_vsphere_client(server=vcenter, username=username, password=password, session=session)
@@ -36,20 +35,18 @@ def main():
 
         stub_config = client._stub_config  # Get the SDK stub configuration
 
-        # Initialize the SubscribedLibrary service for syncing libraries
         try:
+            # Instantiate the SubscribedLibrary service for listing and syncing
             subscribed_library_service = SubscribedLibrary(stub_config)
         except Exception as e:
             print(f"Error initializing SubscribedLibrary service: {e}")
             continue
 
-        # Use the Subscriptions service to list library IDs (if available)
         try:
-            subscriptions_service = Subscriptions(stub_config)
-            # If the SDK provides a list() method, use it; otherwise, you may need to input library IDs manually.
-            library_ids = subscriptions_service.list()  
+            # Use the SubscribedLibrary service's list() method
+            library_ids = subscribed_library_service.list()
         except Exception as e:
-            print(f"Error listing subscriptions: {e}")
+            print(f"Error listing subscribed libraries on {vcenter}: {e}")
             library_ids = []
 
         if not library_ids:
