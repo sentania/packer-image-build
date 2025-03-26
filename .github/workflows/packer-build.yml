@@ -7,6 +7,9 @@ on:
   pull_request:
     branches:
       - main
+  schedule:
+      - cron: "0 0 1 * *"  # Runs on the first day of the month at 12:00 AM UTC (adjust as needed)
+  workflow_dispatch:    # Allows manual triggering via the GitHub Actions UI
 
 jobs:
   packer-build:
@@ -17,10 +20,10 @@ jobs:
 
       - name: Run `packer init`
         working-directory: ubuntu
-        id: init22
+        id: initUbuntu
         run: "packer init ./ubuntu.pkr.hcl"
 
-      - name: Build Ubuntu 22 Image
+      - name: Build Ubuntu Images
         working-directory: ubuntu
         env:
           VCENTER_USERNAME: ${{ vars.VCENTER_USERNAME }}
