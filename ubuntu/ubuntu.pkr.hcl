@@ -71,7 +71,7 @@ source "vsphere-iso" "ubuntu24" {
   content_library_destination {
     destroy = var.library_vm_destroy
     library = var.content_library_destination
-    name    = "ubuntu24"
+    name    = "ubuntu24"    
     ovf     = var.ovf
   }
 
@@ -80,7 +80,7 @@ source "vsphere-iso" "ubuntu24" {
   RAM_reserve_all       = true
   disk_controller_type  = ["pvscsi"]
   guest_os_type         = "ubuntu64Guest"
-  iso_paths             = ["${var.content_library_destination}/ubuntu-24.04.2-live-server-amd64/ubuntu-24.04.2-live-server-amd64.iso"]
+  iso_paths             = ["${var.content_library_destination}/ubuntu-24.04.3-live-server-amd64/ubuntu-24.04.3-live-server-amd64.iso"]
   cd_content        = {
     "/meta-data" = file("${var.cloudinit_metadata}")
     "/user-data" = file("${var.cloudinit_userdata}")
