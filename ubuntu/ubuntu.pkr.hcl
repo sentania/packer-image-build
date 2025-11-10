@@ -129,7 +129,7 @@ build {
 
   # Copy the root CA into the VM (filename with spaces is fine when quoted)
   provisioner "file" {
-    source      = "${path.root}/files/sentania Lab Root 2.crt"
+    source      = "../files/sentania Lab Root 2.crt"
     destination = "/tmp/sentania Lab Root 2.crt"
   }
 
