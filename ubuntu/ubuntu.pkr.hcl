@@ -136,8 +136,6 @@ build {
   # Trust the CA
   provisioner "shell" {
     inline = [
-      "set -euo pipefail",
-      # safety: no-op if already present; useful if autoinstall changes later
       "sudo apt-get update -y && sudo apt-get install -y --no-install-recommends ca-certificates || true",
 
       # install the cert and update trust
