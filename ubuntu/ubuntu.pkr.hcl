@@ -115,9 +115,8 @@ source "vsphere-iso" "ubuntu24" {
     "disk.EnableUUID" = "true"
   }
 }
-
 build {
-  sources = ["source.vsphere-iso.ubuntu22","source.vsphere-iso.ubuntu24"]
+  sources = ["source.vsphere-iso.ubuntu22", "source.vsphere-iso.ubuntu24"]
 
   provisioner "shell" {
     execute_command = "echo '${var.ssh_password}' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
@@ -128,4 +127,22 @@ build {
     expect_disconnect = true
   }
 
+  # Copy the root CA into the VM (filename with spaces is fine when quoted)
+  provisioner "file" {
+    source      = "${path.root}/files/sentania Lab Root 2.crt"
+    destination = "/tmp/sentania Lab Root 2.crt"
+  }
+
+  # Trust the CA
+  provisioner "shell" {
+    inline = [
+      "set -euo pipefail",
+      # safety: no-op if already present; useful if autoinstall changes later
+      "sudo apt-get update -y && sudo apt-get install -y --no-install-recommends ca-certificates || true",
+
+      # install the cert and update trust
+      "sudo install -m 0644 -o root -g root /tmp/sentania\\ Lab\\ Root\\ 2.crt /usr/local/share/ca-certificates/sentania-lab-root-2.crt",
+      "sudo update-ca-certificates"
+    ]
+  }
 }
