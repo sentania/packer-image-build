@@ -21,7 +21,7 @@ source "vsphere-iso" "ubuntu22" {
   RAM_reserve_all       = true
   disk_controller_type  = ["pvscsi"]
   guest_os_type         = "ubuntu64Guest"
-  iso_paths             = ["vcenter.int.sentania.net/ubuntu-22.04.5-live-server-amd64/ubuntu-22.04.5-live-server-amd64.iso"]
+  iso_paths             = ["var.content_library_destination/ubuntu-22.04.5-live-server-amd64/ubuntu-22.04.5-live-server-amd64.iso"]
   cd_content        = {
     "/meta-data" = file("${var.cloudinit_metadata}")
     "/user-data" = file("${var.cloudinit_userdata}")
@@ -80,7 +80,7 @@ source "vsphere-iso" "ubuntu24" {
   RAM_reserve_all       = true
   disk_controller_type  = ["pvscsi"]
   guest_os_type         = "ubuntu64Guest"
-  iso_paths             = ["vcenter.int.sentania.net/ubuntu-24.04.2-live-server-amd64/ubuntu-24.04.2-live-server-amd64.iso"]
+  iso_paths             = ["var.content_library_destination/ubuntu-24.04.2-live-server-amd64/ubuntu-24.04.2-live-server-amd64.iso"]
   cd_content        = {
     "/meta-data" = file("${var.cloudinit_metadata}")
     "/user-data" = file("${var.cloudinit_userdata}")

@@ -1,46 +1,59 @@
 FROM ubuntu:24.04
-
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Base deps + Python + venv + CA tools
 RUN apt-get update && apt-get install -y \
+    ca-certificates \
     curl \
-    jq \
     git \
-    libicu70 \
+    jq \
+    libicu74 \
     libkrb5-3 \
     libssl3 \
-    wget \
-    unzip \
-    xorriso \
     python3 \
     python3-pip \
-    && pip3 install requests \
-    pip install --upgrade git+https://github.com/vmware/vsphere-automation-sdk-python.git \\
-    && rm -rf /var/lib/apt/lists/*
+    python3-venv \
+    unzip \
+    wget \
+    xorriso \
+ && rm -rf /var/lib/apt/lists/*
 
+# --- Trust your internal CA ---
+# Put your file alongside the Dockerfile. We rename it on copy to avoid spaces.
+# IMPORTANT: Must be PEM-encoded and have a .crt extension.
+COPY ["sentania Lab Root 2.crt", "/usr/local/share/ca-certificates/sentania-lab-root-2.crt"]
+RUN update-ca-certificates
+
+# Make common tools (requests, git, curl, pip) use the system trust bundle explicitly
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+ENV REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+ENV GIT_SSL_CAINFO=/etc/ssl/certs/ca-certificates.crt
+ENV CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+
+# Non-root user for runner
 ARG RUNNER_UID=999
 RUN useradd -m -u ${RUNNER_UID} runner
-
 WORKDIR /home/runner
 
+# GitHub Actions runner
 ENV RUNNER_VERSION=2.329.0
-
 RUN curl -L -O https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz \
-    && tar xzf actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz \
-    && rm actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz
+ && tar xzf actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz \
+ && rm actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz
 
+# Packer (parameterized)
 ENV PACKER_VERSION=1.14.2
-
-# Download and install Packer using the parameterized version
 RUN wget https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip \
-    && unzip packer_${PACKER_VERSION}_linux_amd64.zip -d /usr/local/bin \
-    && rm packer_${PACKER_VERSION}_linux_amd64.zip
-    
-# Copy the entrypoint script to /opt so it won’t be overridden by the volume mount
+ && unzip packer_${PACKER_VERSION}_linux_amd64.zip -d /usr/local/bin \
+ && rm packer_${PACKER_VERSION}_linux_amd64.zip
+
+# Python venv for non-apt deps (e.g., VMware SDK)
+RUN python3 -m venv /opt/pyenv \
+ && /opt/pyenv/bin/pip install --upgrade pip \
+ && /opt/pyenv/bin/pip install git+https://github.com/vmware/vsphere-automation-sdk-python.git
+ENV PATH="/opt/pyenv/bin:${PATH}"
+
+# Entrypoint
 COPY --chmod=0755 entrypoint.sh /opt/entrypoint.sh
-
 USER runner
-
-# Set the entrypoint from the /opt directory
 ENTRYPOINT ["/opt/entrypoint.sh"]
-

@@ -1,12 +1,12 @@
 
 # vsphere datacenter name
-vsphere_datacenter      = "sboweLab"
+vsphere_datacenter      = "vcf-lab-mgmt01-dc01"
 
 # name or IP of the ESXi host
 vsphere_host            = "esx1.int.sentania.net"
 
 # vsphere network
-vsphere_network         = "VLAN2500 172.25.0.0_24"
+vsphere_network         = "vcf-lab-mgmt01-cl01-vds01-pg-vm-mgmt"
 
 # vsphere datastore
 vsphere_datastore       = "esx1-local"
@@ -23,3 +23,5 @@ ssh_username            = "labuser"
 
 # SSH password (created in autounattend.xml. If you change it here the please also adjust in ./html/user-data)
 ssh_password            = "VMware123!"
+
+ovf = true
