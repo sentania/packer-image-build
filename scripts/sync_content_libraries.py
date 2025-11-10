@@ -25,7 +25,7 @@ def main():
     for vcenter in vcenters:
         print(f"\nProcessing vCenter: {vcenter}")
         session = requests.session()
-        session.verify = False  # Disable certificate verification if needed
+        session.verify = true  # Disable certificate verification if needed
 
         try:
             client = create_vsphere_client(server=vcenter, username=username, password=password, session=session)
