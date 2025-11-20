@@ -36,12 +36,12 @@ jobs:
             -var "vsphere_password=${VCENTER_PASSWORD}" \
             -var "vsphere_server=${VCENTER_SERVER}" \
             -var='content_library_destination=vcf-lab-mgmt-contentlibrary' .   
-      
-      - name: Pre-clean workspace
-        run: "sudo rm -rf $GITHUB_WORKSPACE/*"
-        
+              
       - name: Cleanup Packer cache
         run: |
           rm -rf ./.packer.d
           rm -rf ~/.cache/packer
+      
+      - name: Clean workspace
+        run: "sudo rm -rf $GITHUB_WORKSPACE/*"
 
