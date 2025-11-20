@@ -13,8 +13,16 @@ on:
 
 jobs:
   packer-build:
-    runs-on: self-hosted  # Ensure your self-hosted runner has Packer installed
+    runs-on: [self-hosted, packer]  # Ensure your self-hosted runner has Packer installed
     steps:
+      - name: Pre-clean workspace
+        run: "sudo rm -rf $GITHUB_WORKSPACE/*"
+        
+      - name: Cleanup Packer cache
+        run: |
+          rm -rf ./.packer.d
+          rm -rf ~/.cache/packer
+
       - name: Checkout Repository
         uses: actions/checkout@v3
 
@@ -36,7 +44,4 @@ jobs:
             -var "vsphere_password=${VCENTER_PASSWORD}" \
             -var "vsphere_server=${VCENTER_SERVER}" \
             -var='content_library_destination=vcf-lab-mgmt-contentlibrary' .   
-                
-           
 
-    
