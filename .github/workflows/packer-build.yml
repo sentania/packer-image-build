@@ -37,13 +37,6 @@ jobs:
             -var "vsphere_server=${VCENTER_SERVER}" \
             -var='content_library_destination=vcf-lab-mgmt-contentlibrary' .   
                 
-      - name: Sync Content Libraries
-        working-directory: scripts
-        env:
-          VCENTER_USERNAME: ${{ vars.VCENTER_USERNAME }}
-          VCENTER_PASSWORD: ${{ secrets.VCENTER_PASSWORD }}
-        id: syncLibrary
-        run: "python3 sync_content_libraries.py ${VCENTER_USERNAME} ${VCENTER_PASSWORD}"
            
 
     
