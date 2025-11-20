@@ -1,3 +1,12 @@
+packer {
+  required_plugins {
+    vsphere = {
+      version = ">= 0.0.1"
+      source = "github.com/hashicorp/vsphere"
+    }
+  }
+}
+
 source "vsphere-iso" "ubuntu22" {
 
   vcenter_server        = var.vsphere_server

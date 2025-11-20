@@ -1,11 +1,3 @@
-packer {
-  required_plugins {
-    vsphere = {
-      version = ">= 0.0.1"
-      source = "github.com/hashicorp/vsphere"
-    }
-  }
-}
 variable "content_library_destination" {
   type    = string
   default = "vcenter.int.sentania.net"
