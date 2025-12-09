@@ -16,7 +16,7 @@ jobs:
     runs-on: [self-hosted, packer]  # Ensure your self-hosted runner has Packer installed
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v3
 
       - name: Run `packer init`
         working-directory: ubuntu
